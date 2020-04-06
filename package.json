@@ -1,0 +1,30 @@
+{
+  "name": "branchlint-action",
+  "version": "0.0.1",
+  "author": "Kornel Dubieniecki",
+  "description": "Lint your git branch names using github action",
+  "scripts": {
+    "build": "ncc build index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lekterable/branchlint-action"
+  },
+  "bugs": {
+    "url": "https://github.com/lekterable/branchlint-action/issues"
+  },
+  "keywords": [
+    "github",
+    "action",
+    "actions",
+    "lint",
+    "branchlint"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.1",
+    "husky": "^4.2.3",
+    "prettier": "^2.0.4",
+    "pretty-quick": "^2.0.1"
+  }
+}

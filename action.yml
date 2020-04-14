@@ -1,0 +1,13 @@
+name: Branchlint
+description: Lint your git branch names using github action.
+author: Kornel Dubieniecki
+branding:
+  icon: arrow-up
+  color: black
+inputs:
+  allowed:
+    description: An array of strings/RegExp objects.
+    required: true
+runs:
+  using: node12
+  main: dist/index.js

@@ -21,6 +21,11 @@
     "branchlint"
   ],
   "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/github": "^2.1.1",
+    "regex-parser": "^2.2.10"
+  },
   "devDependencies": {
     "@zeit/ncc": "^0.22.1",
     "husky": "^4.2.3",

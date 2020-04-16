@@ -3,7 +3,7 @@ const github = require('@actions/github')
 const RegexParser = require('regex-parser')
 
 const isRegex = (input = '') => /^\/.*\/[gimsuy]*$/.test(input)
-const validateName = (patterns = [], branchName = '') =>
+const validateName = (branchName = '', patterns = []) =>
   patterns.some(pattern =>
     isRegex(pattern)
       ? RegexParser(pattern).test(branchName)
@@ -16,7 +16,7 @@ const run = async () => {
     const branchName = github.context.payload.pull_request.head.ref
     const patterns = allowed.split('\n')
 
-    const isCorrect = validateName(patterns, branchName)
+    const isCorrect = validateName(branchName, patterns)
 
     if (!isCorrect) throw new Error('Your branch name is not allowed')
   } catch (error) {

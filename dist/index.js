@@ -8561,7 +8561,7 @@ const run = async branchName => {
 
 run(github.context.payload.pull_request.head.ref)
 
-module.exports = { isRegex, validateName }
+module.exports = { isRegex, validateName, run }
 
 
 /***/ }),

@@ -8562,7 +8562,7 @@ const run = async () => {
 
 run()
 
-module.exports = { isRegex }
+module.exports = { isRegex, validateName }
 
 
 /***/ }),

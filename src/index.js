@@ -2,7 +2,7 @@ const core = require('@actions/core')
 const github = require('@actions/github')
 const RegexParser = require('regex-parser')
 
-const isRegex = (input = '') => /^\/.*\/[gimsuy]?$/.test(input)
+const isRegex = (input = '') => /^\/.*\/[gimsuy]*$/.test(input)
 const validateName = (patterns = [], branchName = '') =>
   patterns.some(pattern =>
     isRegex(pattern)

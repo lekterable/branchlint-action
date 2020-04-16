@@ -25,3 +25,5 @@ const run = async () => {
 }
 
 run()
+
+module.exports = { isRegex }

@@ -10,10 +10,9 @@ const validateName = (branchName = '', patterns = []) =>
       : pattern === branchName
   )
 
-const run = async () => {
+const run = async branchName => {
   try {
     const allowed = core.getInput('allowed', { required: true })
-    const branchName = github.context.payload.pull_request.head.ref
     const patterns = allowed.split('\n')
 
     const isCorrect = validateName(branchName, patterns)
@@ -24,6 +23,6 @@ const run = async () => {
   }
 }
 
-run()
+run(github.context.payload.pull_request.head.ref)
 
 module.exports = { isRegex, validateName }

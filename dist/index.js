@@ -8538,7 +8538,7 @@ const core = __webpack_require__(470)
 const github = __webpack_require__(469)
 const RegexParser = __webpack_require__(921)
 
-const isRegex = (input = '') => /^\/.*\/[gimsuy]?$/.test(input)
+const isRegex = (input = '') => /^\/.*\/[gimsuy]*$/.test(input)
 const validateName = (patterns = [], branchName = '') =>
   patterns.some(pattern =>
     isRegex(pattern)

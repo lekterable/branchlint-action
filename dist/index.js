@@ -8532,7 +8532,7 @@ module.exports = function btoa(str) {
 /***/ }),
 
 /***/ 676:
-/***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
+/***/ (function(module, __unusedexports, __webpack_require__) {
 
 const core = __webpack_require__(470)
 const github = __webpack_require__(469)
@@ -8561,6 +8561,8 @@ const run = async () => {
 }
 
 run()
+
+module.exports = { isRegex }
 
 
 /***/ }),

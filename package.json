@@ -4,7 +4,8 @@
   "author": "Kornel Dubieniecki",
   "description": "Lint your git branch names using github action",
   "scripts": {
-    "build": "ncc build ./src/index.js"
+    "build": "ncc build ./src/index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@zeit/ncc": "^0.22.1",
     "husky": "^4.2.5",
+    "jest": "^25.3.0",
     "prettier": "^2.0.4",
     "pretty-quick": "^2.0.1"
   }

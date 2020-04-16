@@ -34,7 +34,7 @@ module.exports =
 /******/ 	// the startup function
 /******/ 	function startup() {
 /******/ 		// Load entry module and return exports
-/******/ 		return __webpack_require__(104);
+/******/ 		return __webpack_require__(676);
 /******/ 	};
 /******/
 /******/ 	// run startup
@@ -497,40 +497,6 @@ module.exports = windowsRelease;
 /***/ (function(module) {
 
 module.exports = require("os");
-
-/***/ }),
-
-/***/ 104:
-/***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
-
-const core = __webpack_require__(470)
-const github = __webpack_require__(469)
-const RegexParser = __webpack_require__(921)
-
-const isRegex = (input = '') => /^\/.*\/[gimsuy]?$/.test(input)
-const validateName = (patterns = [], branchName = '') =>
-  patterns.some(pattern =>
-    isRegex(pattern)
-      ? RegexParser(pattern).test(branchName)
-      : pattern === branchName
-  )
-
-const run = async () => {
-  try {
-    const allowed = core.getInput('allowed', { required: true })
-    const branchName = github.context.payload.pull_request.head.ref
-    const patterns = allowed.split('\n')
-
-    const isCorrect = validateName(patterns, branchName)
-
-    if (!isCorrect) throw new Error('Your branch name is not allowed')
-  } catch (error) {
-    core.setFailed(error.message)
-  }
-}
-
-run()
-
 
 /***/ }),
 
@@ -8561,6 +8527,40 @@ function authenticate(state, options) {
 module.exports = function btoa(str) {
   return new Buffer(str).toString('base64')
 }
+
+
+/***/ }),
+
+/***/ 676:
+/***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
+
+const core = __webpack_require__(470)
+const github = __webpack_require__(469)
+const RegexParser = __webpack_require__(921)
+
+const isRegex = (input = '') => /^\/.*\/[gimsuy]?$/.test(input)
+const validateName = (patterns = [], branchName = '') =>
+  patterns.some(pattern =>
+    isRegex(pattern)
+      ? RegexParser(pattern).test(branchName)
+      : pattern === branchName
+  )
+
+const run = async () => {
+  try {
+    const allowed = core.getInput('allowed', { required: true })
+    const branchName = github.context.payload.pull_request.head.ref
+    const patterns = allowed.split('\n')
+
+    const isCorrect = validateName(patterns, branchName)
+
+    if (!isCorrect) throw new Error('Your branch name is not allowed')
+  } catch (error) {
+    core.setFailed(error.message)
+  }
+}
+
+run()
 
 
 /***/ }),

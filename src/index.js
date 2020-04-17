@@ -1,11 +1,11 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
 const RegexParser = require('regex-parser')
+const isRegexy = require('is-regexy')
 
-const isRegex = (input = '') => /^\/.*\/[gimsuy]*$/.test(input)
 const validateName = (branchName = '', patterns = []) =>
   patterns.some(pattern =>
-    isRegex(pattern)
+    isRegexy(pattern)
       ? RegexParser(pattern).test(branchName)
       : pattern === branchName
   )
@@ -25,4 +25,4 @@ const run = async branchName => {
 
 run(github.context.payload.pull_request.head.ref)
 
-module.exports = { isRegex, validateName, run }
+module.exports = { validateName, run }

@@ -5,7 +5,9 @@
   "description": "Lint your git branch names using github action",
   "scripts": {
     "build": "ncc build ./src/index.js",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --collectCoverage",
+    "codecov": "codecov"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.1",
+    "codecov": "^3.6.5",
     "husky": "^4.2.5",
     "jest": "^25.3.0",
     "prettier": "^2.0.4",

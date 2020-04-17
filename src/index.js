@@ -3,7 +3,7 @@ const github = require('@actions/github')
 const RegexParser = require('regex-parser')
 const isRegexy = require('is-regexy')
 
-const validateName = (branchName = '', patterns = []) =>
+const validateName = (branchName, patterns) =>
   patterns.some(pattern =>
     isRegexy(pattern)
       ? RegexParser(pattern).test(branchName)

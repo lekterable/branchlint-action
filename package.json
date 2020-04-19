@@ -1,6 +1,6 @@
 {
   "name": "branchlint-action",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Kornel Dubieniecki",
   "description": "Lint your git branch names using github action",
   "scripts": {

@@ -3,4 +3,5 @@ node_js: 13
 cache:
   npm: false
 script: npm run test:coverage
+before_install: rm -rf package-lock.json node_modules
 after_success: bash <(curl -s https://codecov.io/bash)

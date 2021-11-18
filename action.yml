@@ -8,6 +8,9 @@ inputs:
   allowed:
     description: An array of strings/RegExp objects.
     required: true
+  error:
+    description: A string with an error message.
+    required: false
 runs:
   using: node12
   main: dist/index.js

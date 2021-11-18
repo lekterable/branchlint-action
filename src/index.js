@@ -15,9 +15,13 @@ const run = async branchName => {
     const allowed = core.getInput('allowed', { required: true })
     const patterns = allowed.split('\n')
 
+    let errorMsg = core.getInput('error', { required: false })
+
     const isCorrect = validateName(branchName, patterns)
 
-    if (!isCorrect) throw new Error('Your branch name is not allowed')
+    if (errorMsg == '') errorMsg = 'Your branch name is not allowed'
+
+    if (!isCorrect) throw new Error(errorMsg)
   } catch (error) {
     core.setFailed(error.message)
   }

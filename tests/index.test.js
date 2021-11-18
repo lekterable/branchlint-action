@@ -2,7 +2,8 @@ const { validateName, run } = require('../src/')
 const core = require('@actions/core')
 
 jest.mock('@actions/core', () => ({
-  getInput: () => `development\n/(fix|feat|chore)/DEV-\\d{4}/`,
+  getInput: name =>
+    process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`] || '',
   setFailed: jest.fn()
 }))
 jest.mock('@actions/github', () => ({
@@ -34,6 +35,8 @@ describe('validateName', () => {
 describe('run', () => {
   beforeEach(() => {
     jest.resetAllMocks()
+    process.env.INPUT_ALLOWED = `development\n/(fix|feat|chore)/DEV-\\d{4}/`
+    process.env.INPUT_ERROR = ''
   })
 
   it('should fail if branch name is not allowed', () => {
@@ -41,6 +44,16 @@ describe('run', () => {
 
     expect(core.setFailed).toBeCalledTimes(1)
     expect(core.setFailed).toBeCalledWith('Your branch name is not allowed')
+  })
+
+  it('should fail with a custom message if branch name is not allowed', () => {
+    const errorMsg = 'This is a custom error message'
+
+    process.env.INPUT_ERROR = errorMsg
+    run('master')
+
+    expect(core.setFailed).toBeCalledTimes(1)
+    expect(core.setFailed).toBeCalledWith(errorMsg)
   })
 
   it('should pass if branch name is an allowed string', () => {

@@ -1,15 +1,18 @@
 const { validateName, run } = require('../src/')
 const core = require('@actions/core')
+const github = require('@actions/github')
 
 jest.mock('@actions/core', () => ({
   getInput: name =>
     process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`] || '',
   setFailed: jest.fn()
 }))
+
 jest.mock('@actions/github', () => ({
   context: {
     payload: {
       pull_request: {
+        created_at: '2011-01-26T19:01:12Z',
         head: {
           ref: 'development'
         }
@@ -35,13 +38,14 @@ describe('validateName', () => {
 describe('run', () => {
   beforeEach(() => {
     jest.resetAllMocks()
+    github.context.payload.pull_request.head.ref = 'master'
     process.env.INPUT_ALLOWED = `development\n/(fix|feat|chore)/DEV-\\d{4}/`
     process.env.INPUT_ERROR = ''
     process.env.INPUT_STARTDATE = ''
   })
 
   it('should fail if branch name is not allowed', () => {
-    run('master')
+    run(github.context.payload.pull_request)
 
     expect(core.setFailed).toBeCalledTimes(1)
     expect(core.setFailed).toBeCalledWith('Your branch name is not allowed')
@@ -51,41 +55,43 @@ describe('run', () => {
     const errorMsg = 'This is a custom error message'
     process.env.INPUT_ERROR = errorMsg
 
-    run('master')
+    run(github.context.payload.pull_request)
 
     expect(core.setFailed).toBeCalledTimes(1)
     expect(core.setFailed).toBeCalledWith(errorMsg)
   })
 
-  it('should fail if start date is in the past', () => {
-    let now = new Date()
-    now.setDate(now.getDate() - 7)
-    process.env.INPUT_STARTDATE = now.toISOString()
+  it('should pass if created at is before start date', () => {
+    let date = new Date(github.context.payload.pull_request.created_at)
+    date.setDate(date.getDate() + 1)
+    process.env.INPUT_STARTDATE = date.toISOString()
 
-    run('master')
+    run(github.context.payload.pull_request)
+
+    expect(core.setFailed).not.toBeCalled()
+  })
+
+  it('should fail if created at is after start date', () => {
+    let date = new Date(github.context.payload.pull_request.created_at)
+    date.setDate(date.getDate() - 1)
+    process.env.INPUT_STARTDATE = date.toISOString()
+
+    run(github.context.payload.pull_request)
 
     expect(core.setFailed).toBeCalledTimes(1)
     expect(core.setFailed).toBeCalledWith('Your branch name is not allowed')
   })
 
-  it('should pass if start date is in the future', () => {
-    let now = new Date()
-    now.setDate(now.getDate() + 7)
-    process.env.INPUT_STARTDATE = now.toISOString()
-
-    run('master')
-
-    expect(core.setFailed).not.toBeCalled()
-  })
-
   it('should pass if branch name is an allowed string', () => {
-    run('development')
+    github.context.payload.pull_request.head.ref = 'development'
+    run(github.context.payload.pull_request)
 
     expect(core.setFailed).not.toBeCalled()
   })
 
   it('should pass if branch name is an allowed Regex', () => {
-    run('fix/DEV-1234')
+    github.context.payload.pull_request.head.ref = 'fix/DEV-1234'
+    run(github.context.payload.pull_request)
 
     expect(core.setFailed).not.toBeCalled()
   })

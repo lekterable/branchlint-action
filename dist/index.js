@@ -7776,12 +7776,20 @@ const validateName = (branchName, patterns) =>
 
 const run = async branchName => {
   try {
+    const currentdate = new Date()
+    let startDate = core.getInput('startDate', { required: true })
+
+    if (startDate != '') {
+      startDate = new Date(startDate)
+
+      if (startDate >= currentdate) return
+    }
+
     const allowed = core.getInput('allowed', { required: true })
     const patterns = allowed.split('\n')
+    const isCorrect = validateName(branchName, patterns)
 
     let errorMsg = core.getInput('error', { required: false })
-
-    const isCorrect = validateName(branchName, patterns)
 
     if (errorMsg == '') errorMsg = 'Your branch name is not allowed'
 

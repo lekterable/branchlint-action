@@ -3,13 +3,16 @@ description: Lint your git branch names using github action.
 author: Kornel Dubieniecki
 branding:
   icon: arrow-up
-  color: black
+  color: gray-dark
 inputs:
   allowed:
     description: An array of strings/RegExp objects.
     required: true
   error:
     description: A string with an error message.
+    required: false
+  startDate:
+    description: A date string with YYYY-MM-DD hh:mm:ss format
     required: false
 runs:
   using: node12

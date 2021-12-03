@@ -34,7 +34,7 @@ const run = async pullRequest => {
     const createdAt = pullRequest.created_at
 
     const message = core.getInput('error', { required: false })
-    const startDate = core.getInput('startDate', { required: true })
+    const startDate = core.getInput('startDate', { required: false })
     const allowed = core.getInput('allowed', { required: true })
 
     const patterns = allowed.split('\n')

@@ -10,19 +10,44 @@ const validateName = (branchName, patterns) =>
       : pattern === branchName
   )
 
-const run = async branchName => {
-  try {
-    const allowed = core.getInput('allowed', { required: true })
-    const patterns = allowed.split('\n')
+const errorMessage = message => {
+  if (message == '') return 'Your branch name is not allowed'
 
+  return message
+}
+
+const validateDate = (createdAt, startDate) => {
+  createdAt = new Date(createdAt)
+
+  if (startDate != '') {
+    startDate = new Date(startDate)
+
+    return createdAt < startDate
+  }
+
+  return false
+}
+
+const run = async pullRequest => {
+  try {
+    const branchName = pullRequest.head.ref
+    const createdAt = pullRequest.created_at
+
+    const message = core.getInput('error', { required: false })
+    const startDate = core.getInput('startDate', { required: false })
+    const allowed = core.getInput('allowed', { required: true })
+
+    const patterns = allowed.split('\n')
     const isCorrect = validateName(branchName, patterns)
 
-    if (!isCorrect) throw new Error('Your branch name is not allowed')
+    if (validateDate(createdAt, startDate)) return
+
+    if (!isCorrect) throw new Error(errorMessage(message))
   } catch (error) {
     core.setFailed(error.message)
   }
 }
 
-run(github.context.payload.pull_request.head.ref)
+run(github.context.payload.pull_request)
 
 module.exports = { validateName, run }

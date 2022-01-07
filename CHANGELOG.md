@@ -1,8 +1,19 @@
-# Latest
+# 1.2.0
+
+## Features
+
+- add custom error message and validation start date (#2) [dd5e2b1a](https://github.com/lekterable/branchlint-action/commit/dd5e2b1ab77bfb45d99cee3a8ccc49e25be98752)
 
 ## Misc
 
-- generate changelog using perfekt [6d47f937](https://github.com/lekterable/branchlint-action/commit/6d47f937081233d50c987c6d4e73227d8639933c)
+- update README badge [15016f75](https://github.com/lekterable/branchlint-action/commit/15016f752916e5968048c19fe7f3a7e3c76dfc84)
+- regenerate package-lock.json file [85b61618](https://github.com/lekterable/branchlint-action/commit/85b616189ecfee75e03dbebec25ecaf551fd6cf0)
+- remove travis.yml file [00178437](https://github.com/lekterable/branchlint-action/commit/00178437bc45d33f0c6e00666367e8a691ce5eb6)
+- setup CI using github actions [463a47e8](https://github.com/lekterable/branchlint-action/commit/463a47e86f1f0a5885763a65fcf56887a133bfd6)
+- add before_install step [1379d023](https://github.com/lekterable/branchlint-action/commit/1379d023dcbc2d00116a9fc0342f67a5857e84cf)
+- disable npm caching [2ffc3712](https://github.com/lekterable/branchlint-action/commit/2ffc3712a3476d8510038652710112fed432b402)
+- remove cache step from travis.yml [3af49250](https://github.com/lekterable/branchlint-action/commit/3af49250bd70a2dded48527c9479c593ae3fd3fe)
+- generate changelog using perfekt [184922ea](https://github.com/lekterable/branchlint-action/commit/184922eacd73b4d60ed704c1049ae8b9afc2d65a)
 - update README [10301d6b](https://github.com/lekterable/branchlint-action/commit/10301d6b1377544d099ea0c8a4dc3e2396feeba4)
 - remove unused command [bbc7a281](https://github.com/lekterable/branchlint-action/commit/bbc7a281c32012155c776590476877ca8cc64a9f)
 

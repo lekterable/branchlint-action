@@ -1,6 +1,6 @@
 # Branchlint ![CI](https://github.com/lekterable/branchlint-action/workflows/CI/badge.svg) [![codecov](https://codecov.io/gh/lekterable/branchlint-action/branch/master/graph/badge.svg)](https://codecov.io/gh/lekterable/branchlint-action) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) [![management: perfekt👌](https://img.shields.io/badge/management-perfekt👌-red.svg?style=flat-square)](https://github.com/lekterable/perfekt)
 
-Lint your git branch names using github action.
+Lint your Git branch names using GitHub action.
 
 ## Usage
 
@@ -12,22 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Lint branch name
-        uses: lekterable/branchlint-action@v1.0.0
+        uses: lekterable/branchlint-action@2.0.0
         with:
-          error: 'Custom error message'
-          startDate: '2021-01-01 00:00:00'
           allowed: |
             development
             /(epic|feat|fix|chore)/DEV-\d{4}/i
+          errorMessage: 'Custom error message'
+          startAfter: '2021-01-01 00:00:00'
 ```
 
-**_error_** - _(optional)_ a custom error message
+**_allowed_** - _(required)_ a list of allowed branch names (strings and/or regular expressions) separated by a new line
 
-**_startDate_** - _(optional)_ a date string (YYYY-MM-DD hh:mm:ss) that the rule will apply after it
+**_errorMessage_** - _(optional)_ a custom error message
 
-**_allowed_** - _(required)_ a list of allowed branch names separated by a new line
-
-**NOTE:** you can use both strings and valid regular expressions.
+**_startAfter_** - _(optional)_ a date string (YYYY-MM-DD hh:mm:ss) after which the linting will start
 
 ## License
 

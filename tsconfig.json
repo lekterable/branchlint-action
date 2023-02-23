@@ -1,0 +1,10 @@
+{
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node"
+  }
+}

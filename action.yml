@@ -1,19 +1,19 @@
 name: Branchlint
-description: Lint your git branch names using github action.
+description: Lint your Git branch names using GitHub action.
 author: Kornel Dubieniecki
 branding:
   icon: arrow-up
   color: gray-dark
 inputs:
   allowed:
-    description: An array of strings/RegExp objects.
+    description: List of allowed branch names containing strings and/or regular expressions separated by a new line.
     required: true
-  error:
-    description: A string with an error message.
+  errorMessage:
+    description: String containing a custom error message.
     required: false
-  startDate:
-    description: A date string with YYYY-MM-DD hh:mm:ss format
+  startAfter:
+    description: String containing a date in `YYYY-MM-DD hh:mm:ss` format after which the linting will start.
     required: false
 runs:
-  using: node12
+  using: node16
   main: dist/index.js

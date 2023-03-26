@@ -1,3 +1,9 @@
+# 2.0.0
+
+## BREAKING
+
+- update usage, bump libraries and rewrite in typescript [b589664d](https://github.com/lekterable/branchlint-action/commit/b589664d60de0461f5cd5e8a1ee89dae7df93746)
+
 # 1.2.0
 
 ## Features

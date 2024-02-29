@@ -15,5 +15,5 @@ inputs:
     description: String containing a date in `YYYY-MM-DD hh:mm:ss` format after which the linting will start.
     required: false
 runs:
-  using: node16
+  using: node20
   main: dist/index.js

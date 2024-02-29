@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Lint branch name
-        uses: lekterable/branchlint-action@2.0.0
+        uses: lekterable/branchlint-action@2.1.0
         with:
           allowed: |
             development
